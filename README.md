@@ -42,11 +42,12 @@ Download and Install [NodeJS](https://nodejs.org/en/download) >= 18.15.0
 
 ### Docker Compose
 
-1. Go to `docker` folder at the root of the project
-2. Copy `.env.example` file, paste it into the same location, and rename to `.env`
-3. `docker compose up -d`
-4. Open [http://localhost:3000](http://localhost:3000)
-5. You can bring the containers down by `docker compose stop`
+1. Clone the Flowise project
+2. Go to `docker` folder at the root of the project
+3. Copy `.env.example` file, paste it into the same location, and rename to `.env` file
+4. `docker compose up -d`
+5. Open [http://localhost:3000](http://localhost:3000)
+6. You can bring the containers down by `docker compose stop`
 
 ### Docker Image
 
@@ -72,6 +73,7 @@ Flowise has 3 different modules in a single mono repository.
 -   `server`: Node backend to serve API logics
 -   `ui`: React frontend
 -   `components`: Third-party nodes integrations
+-   `api-documentation`: Auto-generated swagger-ui API docs from express
 
 ### Prerequisite
 
@@ -125,9 +127,9 @@ Flowise has 3 different modules in a single mono repository.
 
 6.  For development build:
 
-    - Create `.env` file and specify the `VITE_PORT` (refer to `.env.example`) in `packages/ui`
-    - Create `.env` file and specify the `PORT` (refer to `.env.example`) in `packages/server`
-    - Run
+    -   Create `.env` file and specify the `VITE_PORT` (refer to `.env.example`) in `packages/ui`
+    -   Create `.env` file and specify the `PORT` (refer to `.env.example`) in `packages/server`
+    -   Run
 
         ```bash
         pnpm dev
@@ -160,6 +162,7 @@ Deploy Flowise self-hosted in your existing infrastructure, we support various [
 -   [Azure](https://docs.flowiseai.com/deployment/azure)
 -   [Digital Ocean](https://docs.flowiseai.com/deployment/digital-ocean)
 -   [GCP](https://docs.flowiseai.com/deployment/gcp)
+-   [Alibaba Cloud](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Flowise社区版)
 -   <details>
       <summary>Others</summary>
 
@@ -177,7 +180,7 @@ Deploy Flowise self-hosted in your existing infrastructure, we support various [
 
     -   [Elestio](https://elest.io/open-source/flowiseai)
 
-        [![Deploy](https://pub-da36157c854648669813f3f76c526c2b.r2.dev/deploy-on-elestio-black.png)](https://elest.io/open-source/flowiseai)
+        [![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/flowiseai)
 
     -   [Sealos](https://cloud.sealos.io/?openapp=system-template%3FtemplateName%3Dflowise)
 
@@ -189,9 +192,9 @@ Deploy Flowise self-hosted in your existing infrastructure, we support various [
 
       </details>
 
-## 💻 Cloud Hosted
+## ☁️ Flowise Cloud
 
-Coming soon
+[Get Started with Flowise Cloud](https://flowiseai.com/)
 
 ## 🙋 Support
 

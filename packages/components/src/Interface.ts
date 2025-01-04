@@ -93,6 +93,7 @@ export interface INodeParams {
     hint?: Record<string, string>
     tabIdentifier?: string
     tabs?: Array<INodeParams>
+    refresh?: boolean
 }
 
 export interface INodeExecutionData {
@@ -183,6 +184,7 @@ export interface IMultiAgentNode {
 }
 
 type SeqAgentType = 'agent' | 'condition' | 'end' | 'start' | 'tool' | 'state' | 'llm'
+export type ConversationHistorySelection = 'user_question' | 'last_message' | 'all_messages' | 'empty'
 
 export interface ISeqAgentNode {
     id: string
@@ -396,3 +398,48 @@ export interface IVisionChatModal {
     revertToOriginalModel(): void
     setMultiModalOption(multiModalOption: IMultiModalOption): void
 }
+export interface IStateWithMessages extends ICommonObject {
+    messages: BaseMessage[]
+    [key: string]: any
+}
+
+export interface IServerSideEventStreamer {
+    streamEvent(chatId: string, data: string): void
+    streamStartEvent(chatId: string, data: any): void
+
+    streamTokenEvent(chatId: string, data: string): void
+    streamCustomEvent(chatId: string, eventType: string, data: any): void
+
+    streamSourceDocumentsEvent(chatId: string, data: any): void
+    streamUsedToolsEvent(chatId: string, data: any): void
+    streamFileAnnotationsEvent(chatId: string, data: any): void
+    streamToolEvent(chatId: string, data: any): void
+    streamAgentReasoningEvent(chatId: string, data: any): void
+    streamNextAgentEvent(chatId: string, data: any): void
+    streamActionEvent(chatId: string, data: any): void
+    streamArtifactsEvent(chatId: string, data: any): void
+    streamAbortEvent(chatId: string): void
+    streamEndEvent(chatId: string): void
+}
+
+export enum FollowUpPromptProvider {
+    ANTHROPIC = 'chatAnthropic',
+    AZURE_OPENAI = 'azureChatOpenAI',
+    GOOGLE_GENAI = 'chatGoogleGenerativeAI',
+    MISTRALAI = 'chatMistralAI',
+    OPENAI = 'chatOpenAI'
+}
+
+export type FollowUpPromptProviderConfig = {
+    [key in FollowUpPromptProvider]: {
+        credentialId: string
+        modelName: string
+        prompt: string
+        temperature: string
+    }
+}
+
+export type FollowUpPromptConfig = {
+    status: boolean
+    selectedProvider: FollowUpPromptProvider
+} & FollowUpPromptProviderConfig

@@ -1,8 +1,8 @@
 import { omit } from 'lodash'
-import { ICommonObject, IDocument, INode, INodeData, INodeOutputsValue, INodeParams } from '../../../src/Interface'
 import { TextSplitter } from 'langchain/text_splitter'
 import { CSVLoader } from '@langchain/community/document_loaders/fs/csv'
 import { getFileFromStorage, handleEscapeCharacters } from '../../../src'
+import { ICommonObject, IDocument, INode, INodeData, INodeOutputsValue, INodeParams } from '../../../src/Interface'
 
 class Csv_DocumentLoaders implements INode {
     label: string
@@ -108,6 +108,7 @@ class Csv_DocumentLoaders implements INode {
             const chatflowid = options.chatflowid
 
             for (const file of files) {
+                if (!file) continue
                 const fileData = await getFileFromStorage(file, chatflowid)
                 const blob = new Blob([fileData])
                 const loader = new CSVLoader(blob, columnName.trim().length === 0 ? undefined : columnName.trim())
@@ -127,6 +128,7 @@ class Csv_DocumentLoaders implements INode {
             }
 
             for (const file of files) {
+                if (!file) continue
                 const splitDataURI = file.split(',')
                 splitDataURI.pop()
                 const bf = Buffer.from(splitDataURI.pop() || '', 'base64')
